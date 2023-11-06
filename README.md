@@ -108,4 +108,52 @@ commit;
 end;
 --------------------------------------------------------------------------------
 I couldn't do 7th practical so its on luck🤞 ☻ 
---------------------------------------------------------
+--------------------------------------------------------------------------------
+# practical no. 8 Triggers 🔫
+--------------------------------------------------------------------------------
+-- Create the "Library" table
+CREATE TABLE Library (
+  record_id NUMBER PRIMARY KEY,
+  column_to_audit VARCHAR2(255)
+);
+
+-- Create the "Library_Audit" table
+CREATE TABLE Library_Audit (
+  audit_id NUMBER PRIMARY KEY,
+  operation VARCHAR2(10),
+  record_id NUMBER,
+  old_value VARCHAR2(255),
+  audit_timestamp TIMESTAMP
+);
+CREATE SEQUENCE seq_audit_id START WITH 1;
+-----After delete trigger ------------
+CREATE OR REPLACE TRIGGER Library_Delete_Trigger
+AFTER DELETE ON Library
+FOR EACH ROW
+BEGIN
+  INSERT INTO Library_Audit (audit_id, operation, record_id, old_value, audit_timestamp)
+  VALUES (
+    seq_audit_id.NEXTVAL,
+    'DELETE',
+    :OLD.record_id,
+    :OLD.column_to_audit,
+    SYSTIMESTAMP
+  );
+END;
+--------after update trigger ----------------
+CREATE OR REPLACE TRIGGER Library_Update_Trigger
+AFTER UPDATE ON Library
+FOR EACH ROW
+BEGIN
+  IF :NEW.column_to_audit <> :OLD.column_to_audit THEN
+    INSERT INTO Library_Audit (audit_id, operation, record_id, old_value, audit_timestamp)
+    VALUES (
+      seq_audit_id.NEXTVAL,
+      'UPDATE',
+      :OLD.record_id,
+      :OLD.column_to_audit,
+      SYSTIMESTAMP
+    );
+  END IF;
+END;
+------------------------------------------------------------------
