@@ -46,3 +46,66 @@ when others then
 end;
 
 --------------------------------------------------------------------------
+# practical no.  5
+--------------------------------------------------------------------------
+declare 
+r float;
+a float;
+pi float;
+
+begin 
+r:=5;
+pi:=3.14;
+
+for r in 9..25 loop
+a := pi * (r*r);
+dbms_output.put_line('Area of '||r||' is : '|| a);
+
+insert into areaofcircle values (r, a);
+end loop;
+
+commit;
+
+end;
+
+
+...........................................................................
+# practical no. 6
+---------------------------------------------------------------------------
+create or replace procedure proc_grade(
+    p_name IN varchar2,
+    p_marks IN number,
+    p_class out varchar2
+) as 
+begin 
+	if p_marks >=990 and p_marks <= 1500 then
+		p_class:= 'Distinction';
+	elsif p_marks >=900 and p_marks <=989 then
+		p_class:= 'First Class';
+	elsif p_marks >=825 and p_marks<=899 then
+		p_class:= 'Higher Second Class';
+	else
+		p_class:= 'Not classified';
+	end if;
+end;
+------------------------------------
+
+declare
+name varchar2(50);
+marks number;
+class varchar2(50);
+
+begin
+name :='newStudent';
+marks := 1000;
+
+proc_grade(name, marks, class);
+
+dbms_output.put_line(class);
+insert into result values(1, name, class);
+
+commit;
+end;
+--------------------------------------------------------------------------------
+I couldn't do 7th practical so its on luck🤞 ☻ 
+--------------------------------------------------------
