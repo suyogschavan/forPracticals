@@ -157,3 +157,8 @@ BEGIN
   END IF;
 END;
 ------------------------------------------------------------------
+# <a href="https://www.mongodb.com/basics/crud"> mongodb CRUD operations </a>
+----------------------------------------------------------------------
+# <a href="[https://www.mongodb.com/basics/crud](https://www.geeksforgeeks.org/aggregation-in-mongodb/)https://www.geeksforgeeks.org/aggregation-in-mongodb/"> mongodb Aggregation </a>
+----------------------------------------------------------------------
+# <a href="[https://www.mongodb.com/basics/crud](https://www.mongodb.com/docs/manual/core/map-reduce/)https://www.mongodb.com/docs/manual/core/map-reduce/"> mongodb map-reduce operations </a>
